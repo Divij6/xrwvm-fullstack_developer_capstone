@@ -1,68 +1,432 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – Best Cars Dealership</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: darkturquoise;
+      --teal-dark: #008b9e;
+      --teal-light: #e0f7fa;
+      --text-dark: #1a2332;
+      --text-mid: #4a5568;
+      --text-light: #718096;
+      --cream: #fafaf8;
+      --white: #ffffff;
+      --gold: #c9a84c;
+      --shadow-soft: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-card: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background-color: var(--teal) !important;
+      height: 1in;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .navbar h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .nav-link {
+      color: white !important;
+      font-weight: 500;
+      font-size: 1rem !important;
+      letter-spacing: 0.3px;
+      padding: 0.4rem 1rem !important;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      background: rgba(255,255,255,0.18) !important;
+    }
+
+    /* ── Hero Banner ── */
+    .about-hero {
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #26c6da 100%);
+      color: white;
+      padding: 80px 60px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 10%;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .about-hero .label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 14px;
+    }
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .about-hero p {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      opacity: 0.92;
+      max-width: 620px;
+      font-weight: 300;
+    }
+
+    /* ── Stats Strip ── */
+    .stats-strip {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 28px 40px;
+      border-bottom: 2px solid var(--teal-light);
+      box-shadow: var(--shadow-soft);
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* ── Main Wrapper ── */
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    /* ── Section Heading ── */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .section-heading .divider {
+      width: 56px;
+      height: 3px;
+      background: var(--teal);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── Team Cards ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .team-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+    }
+    .team-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(145deg, #b2ebf2 0%, #80deea 100%);
+    }
+    .team-card-img-placeholder {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(145deg, #b2ebf2 0%, #80deea 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    .team-card-body {
+      padding: 28px 26px 30px;
+    }
+    .team-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+    .team-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .team-bio {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      margin-bottom: 18px;
+    }
+    .team-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.84rem;
+      color: var(--teal-dark);
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .team-email:hover { border-color: var(--teal); }
+    .team-email svg { flex-shrink: 0; }
+
+    /* ── Values Section ── */
+    .values-section {
+      margin-top: 80px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 0;
+    }
+    .value-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      border-top: 3px solid var(--teal);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 12px; }
+    .value-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .value-desc {
+      font-size: 0.86rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 600px) {
+      .about-hero { padding: 50px 28px 50px; }
+      .stats-strip { flex-wrap: wrap; gap: 20px; }
+    }
+  </style>
 </head>
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-    <div class="container-fluid">
-      <h2 style="padding-right: 5%;">Dealerships</h2>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
-        </div>
-      </div>
+<body>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
-        </div>
-      </div>
+<!-- ── Navbar ── -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <h2 style="padding-right: 5%;">Dealerships</h2>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarText" aria-controls="navbarText"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
-        </div>
-      </div>
+<!-- ── Hero Banner (about-header) ── -->
+<div name="about-header">
+  <div class="about-hero">
+    <div class="label">Since 1998 · North America</div>
+    <h1>About Us</h1>
+    <p>
+      Welcome to Best Cars dealership, home to the best cars in North America.
+      We deal in selling domestic and imported cars at reasonable prices —
+      backed by decades of trust, transparent pricing, and a passion for
+      putting the right driver in the right vehicle.
+    </p>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-number">26+</div>
+      <div class="stat-label">Years in Business</div>
     </div>
+    <div class="stat-item">
+      <div class="stat-number">8,500+</div>
+      <div class="stat-label">Cars Sold</div>
     </div>
+    <div class="stat-item">
+      <div class="stat-number">4.9 ★</div>
+      <div class="stat-label">Customer Rating</div>
     </div>
-    
+    <div class="stat-item">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Locations</div>
+    </div>
+  </div>
 </div>
 
+<!-- ── Page Body ── -->
+<div class="page-wrapper">
+
+  <!-- Meet the Team -->
+  <div class="section-heading">
+    <h2>Meet the Team</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="team-grid">
+
+    <!-- Card 1 -->
+    <div class="team-card">
+      <div class="team-card-img-placeholder">🧑‍💼</div>
+      <div class="team-card-body">
+        <div class="team-role">General Manager</div>
+        <div class="team-name">Marcus Reynolds</div>
+        <p class="team-bio">
+          With over 18 years in automotive retail, Marcus leads our dealership
+          with an emphasis on customer-first service and transparent deals.
+          He personally oversees every vehicle acquisition to ensure quality.
+        </p>
+        <a class="team-email" href="mailto:marcus@bestcars.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+          </svg>
+          marcus@bestcars.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="team-card">
+      <div class="team-card-img-placeholder">👩‍💼</div>
+      <div class="team-card-body">
+        <div class="team-role">Finance Director</div>
+        <div class="team-name">Priya Nair</div>
+        <p class="team-bio">
+          Priya specialises in crafting flexible financing packages that fit
+          every budget. A certified automotive finance professional, she has
+          helped over 3,000 customers drive away stress-free.
+        </p>
+        <a class="team-email" href="mailto:priya@bestcars.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+          </svg>
+          priya@bestcars.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="team-card">
+      <div class="team-card-img-placeholder">🧑‍🔧</div>
+      <div class="team-card-body">
+        <div class="team-role">Head of Service</div>
+        <div class="team-name">Daniel Ortega</div>
+        <p class="team-bio">
+          Daniel runs our certified service centre with a team of 12 master
+          technicians. His commitment to precision keeps every car we sell —
+          and every car that comes in for service — running at its best.
+        </p>
+        <a class="team-email" href="mailto:daniel@bestcars.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+          </svg>
+          daniel@bestcars.com
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Values Section -->
+  <div class="values-section">
+    <div class="section-heading">
+      <h2>What We Stand For</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Honest Pricing</div>
+        <p class="value-desc">No hidden fees. No surprises. What you see is what you pay.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔍</div>
+        <div class="value-title">Rigorous Inspection</div>
+        <p class="value-desc">Every vehicle passes a 150-point check before hitting our lot.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <div class="value-title">Fast Finance</div>
+        <p class="value-desc">Pre-approvals in under 60 minutes — same-day drive-away available.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌎</div>
+        <div class="value-title">Wide Selection</div>
+        <p class="value-desc">Domestic icons to imported luxury — 200+ vehicles always in stock.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
 </html>
