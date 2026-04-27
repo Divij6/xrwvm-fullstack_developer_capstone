@@ -21,14 +21,14 @@ class CarMake(models.Model):
 
 class CarModel(models.Model):
     CAR_TYPES = [
-        ('SEDAN',     'Sedan'),
-        ('SUV',       'SUV'),
-        ('WAGON',     'Wagon'),
+        ('SEDAN', 'Sedan'),
+        ('SUV', 'SUV'),
+        ('WAGON', 'Wagon'),
         ('HATCHBACK', 'Hatchback'),
-        ('COUPE',     'Coupe'),
-        ('TRUCK',     'Truck'),
-        ('VAN',       'Van'),
-        ('MINIVAN',   'Minivan'),
+        ('COUPE', 'Coupe'),
+        ('TRUCK', 'Truck'),
+        ('VAN', 'Van'),
+        ('MINIVAN', 'Minivan'),
     ]
 
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
@@ -43,4 +43,3 @@ class CarModel(models.Model):
 
     def __str__(self):
         return f"{self.car_make.name} {self.name} ({self.year})"
-    

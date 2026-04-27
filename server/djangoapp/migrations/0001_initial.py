@@ -17,25 +17,90 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CarMake',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
-                ('country_of_origin', models.CharField(default='Unknown', max_length=100)),
-                ('founded_year', models.IntegerField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(1800), django.core.validators.MaxValueValidator(2024)])),
-                ('created_at', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
+                (
+                    'country_of_origin',
+                    models.CharField(default='Unknown', max_length=100)
+                ),
+                (
+                    'founded_year',
+                    models.IntegerField(
+                        blank=True,
+                        null=True,
+                        validators=[
+                            django.core.validators.MinValueValidator(1800),
+                            django.core.validators.MaxValueValidator(2024)
+                        ]
+                    )
+                ),
+                (
+                    'created_at',
+                    models.DateTimeField(
+                        default=django.utils.timezone.now,
+                        editable=False
+                    )
+                ),
             ],
         ),
         migrations.CreateModel(
             name='CarModel',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
                 ('dealer_id', models.IntegerField()),
                 ('name', models.CharField(max_length=100)),
-                ('type', models.CharField(choices=[('SEDAN', 'Sedan'), ('SUV', 'SUV'), ('WAGON', 'Wagon'), ('HATCHBACK', 'Hatchback'), ('COUPE', 'Coupe'), ('TRUCK', 'Truck'), ('VAN', 'Van'), ('MINIVAN', 'Minivan')], default='SUV', max_length=20)),
-                ('year', models.IntegerField(validators=[django.core.validators.MinValueValidator(2015), django.core.validators.MaxValueValidator(2023)])),
+                (
+                    'type',
+                    models.CharField(
+                        choices=[
+                            ('SEDAN', 'Sedan'),
+                            ('SUV', 'SUV'),
+                            ('WAGON', 'Wagon'),
+                            ('HATCHBACK', 'Hatchback'),
+                            ('COUPE', 'Coupe'),
+                            ('TRUCK', 'Truck'),
+                            ('VAN', 'Van'),
+                            ('MINIVAN', 'Minivan')
+                        ],
+                        default='SUV',
+                        max_length=20
+                    )
+                ),
+                (
+                    'year',
+                    models.IntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(2015),
+                            django.core.validators.MaxValueValidator(2023)
+                        ]
+                    )
+                ),
                 ('mileage', models.IntegerField(default=0)),
                 ('is_certified', models.BooleanField(default=False)),
-                ('car_make', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='djangoapp.carmake')),
+                (
+                    'car_make',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to='djangoapp.carmake'
+                    )
+                ),
             ],
         ),
     ]
